@@ -1,5 +1,14 @@
 # Issue Tracker App
 
+## Description
+
+Lorem Ipsum Dolor Samet.
+
+[Actions](#actions)
+[Fields](#fields)
+[Tests](#tests)
+[Dev Flow](#dev-flow)
+
 ## Actions
 - View issues on a project. ``GET``
 - Create an issue on a project. ``POST``
@@ -158,3 +167,21 @@
             _id: <issue_id>
         }
     ```
+
+#Dev Flow
+- **Project Preparation**
+  - Read through challenge description [view](https://www.freecodecamp.org/learn/quality-assurance/quality-assurance-projects/issue-tracker)
+  - Check out example project [view](https://issue-tracker.freecodecamp.rocks/)
+- **Initial Setup**
+  - Clone repo with boilerplate code [view](https://github.com/freeCodeCamp/boilerplate-project-issuetracker/) ``git clone``
+  - Install project dependencies ``npm install``
+  - Install nodedemon for hot reloading
+- **Requirement Analysis**
+  - Create readme file with project details
+  - Start working through functional tests
+- **Execution**
+  - Create database connection
+  - Create models folder with issue schema in it
+  - Create controllers folder with issue controller in it
+- **Testing**
+  - Implement functional tests to ensure GET, POST, PUT & DELETE endpoints are working as expected
