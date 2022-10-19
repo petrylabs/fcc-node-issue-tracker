@@ -185,3 +185,14 @@ Lorem Ipsum Dolor Samet.
   - Create controllers folder with issue controller in it
 - **Testing**
   - Implement functional tests to ensure GET, POST, PUT & DELETE endpoints are working as expected
+  - Work on the  POST functionality, modify the POST controller to take in form data and insert it into DB
+    - moongose.Save()
+  - Work on the GET functionality by taking in the incoming request parameters and running a find statement on the issue model to find docs in the DB
+    - moongose.Find()
+  - Work on the PUT functionality by taking 
+    - Take response body, convert into entries map, filter out blank or empty properties, re-create object and pass in as update object to findOneAndUpdate function
+    - mongoose.findOneAndUpdate
+  - Work on the DELETE functionality
+    - mongoose.delete
+  - Error Handling
+    - Next, Return, res.status(500) 
