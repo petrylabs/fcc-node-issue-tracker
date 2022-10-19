@@ -179,6 +179,10 @@ suite('Functional Tests', function() {
                     assert.equal(res.status, 200);
                     assert.isObject(res.body);
                     assert.equal(res.body.issue_title, updates.issue_title);
+                    assert.isAbove(
+                        Date.parse(res.body.updated_on),
+                        Date.parse(res.body.created_on)
+                    )
                 done();
             });
         });
