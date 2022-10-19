@@ -30,8 +30,8 @@ const issue_create_post = (req, res, next) => {
         created_by: req.body.created_by,
         assigned_to: req.body.assigned_to,
         status_text: req.body.status_text,
-        created_on: new Date(),
-        updated_on: new Date() 
+        created_on: new Date().toISOString(),
+        updated_on: new Date().toISOString() 
     })
     newIssue.save((err, data) => {
         let resObj;
@@ -79,7 +79,7 @@ const issue_update_put = (req, res) => {
     }
 
     const updates = Object.fromEntries(valid_fields);
-    updates.updated_on = new Date();
+    updates.updated_on = new Date().toISOString();
 
     console.log('test');
 
