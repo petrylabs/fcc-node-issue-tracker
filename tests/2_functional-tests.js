@@ -61,7 +61,7 @@ suite('Functional Tests', function() {
 
     suite('POST Requests', function () {
         
-        test('Create an issue with every field: POST request to ' + api_path + test_data.project, function (done) {
+        test('1. Create an issue with every field: POST request to ' + api_path + test_data.project, function (done) {
             chai.request(server)
                 .post(api_path + test_data.project)
                 .send(test_data.issues.at(0))
@@ -74,7 +74,7 @@ suite('Functional Tests', function() {
                 });
         });
 
-        test('Create an issue with every field: POST request to ' + api_path + test_data.project, function(done) {
+        test('2. Create an issue with only required fields:  ' + api_path + test_data.project, function(done) {
             
             chai.request(server)
                 .post(api_path + test_data.project)
@@ -100,7 +100,7 @@ suite('Functional Tests', function() {
                 })
         });
 
-        test('Create an issue with missing required fields: POST request to ' + api_path + test_data.project, function(done) {
+        test('3. Create an issue with missing required fields: POST request to ' + api_path + test_data.project, function(done) {
         
             chai.request(server)
                 .post(api_path + test_data.project)
@@ -117,7 +117,7 @@ suite('Functional Tests', function() {
 
     suite('GET Requests', function () {
 
-        test('View issues on a project: GET request to ' + api_path + test_data.project, function (done) {
+        test('4. View issues on a project: GET request to ' + api_path + test_data.project, function (done) {
             chai.request(server)
                 .get(api_path + test_data.project)
                 .end(function(err, res) {
@@ -133,7 +133,7 @@ suite('Functional Tests', function() {
                 })
         });
 
-        test('View issues on a project with one filter: GET request to ' + api_path + test_data.project, function(done) {
+        test('5. View issues on a project with one filter: GET request to ' + api_path + test_data.project, function(done) {
             chai.request(server)
                 .get(api_path + test_data.project + '?issue_title=Functional_Test_1')
                 .end(function(err, res) {
@@ -145,7 +145,7 @@ suite('Functional Tests', function() {
                 })
         });
 
-        test('View issues on a project with multiple filters: GET request to ' + api_path + test_data.project, function(done) {
+        test('6. View issues on a project with multiple filters: GET request to ' + api_path + test_data.project, function(done) {
             chai.request(server)
                 .get(api_path + test_data.project + '?created_by=functional_test_scripts&status=open')
                 .end(function(err, res) {
@@ -164,7 +164,7 @@ suite('Functional Tests', function() {
 
     suite('PUT Requests', function () {
 
-        test('Update one field on an issue: PUT request to ' + api_path + test_data.project, function(done) {
+        test('7. Update one field on an issue: PUT request to ' + api_path + test_data.project, function(done) {
             const target = test_data.issues.at(0);
             const updates = {
                 _id: target._id,
@@ -183,7 +183,7 @@ suite('Functional Tests', function() {
             });
         });
         
-        test('Update multiple fields on an issue: PUT request to /api/issues/{project}' + api_path + test_data.project, function (done) {
+        test('8. Update multiple fields on an issue: PUT request to /api/issues/{project}' + api_path + test_data.project, function (done) {
             const target = test_data.issues.at(1);
             const updates = {
                 _id: target._id,
@@ -204,7 +204,7 @@ suite('Functional Tests', function() {
             });
         });
         
-        test('Update an issue with missing _id: PUT request to /api/issues/{project}' + api_path + test_data.project, function (done) {
+        test('9. Update an issue with missing _id: PUT request to /api/issues/{project}' + api_path + test_data.project, function (done) {
             const updates = {
                 issue_title: 'Should not work',
                 issue_text: 'Missing ID'
@@ -222,7 +222,7 @@ suite('Functional Tests', function() {
             });
         });
         
-        test('Update an issue with no fields to update: PUT request to /api/issues/{project}' + api_path + test_data.project, function (done) {            
+        test('10. Update an issue with no fields to update: PUT request to /api/issues/{project}' + api_path + test_data.project, function (done) {            
             const target = test_data.issues.at(1);
             const updates = {
                 _id: target._id
@@ -239,11 +239,30 @@ suite('Functional Tests', function() {
                 done();
             });
         });
+
+        test('11. Update an issue with an invalid _id: PUT request to /api/issues/{project}' + api_path + test_data.project, function (done) {
+            const updates = {
+                _id: '1231231231djoijisjfoisjoifsdf',
+                issue_title: 'Should not work',
+                issue_text: 'Missing ID'
+            }
+            chai.request(server)
+                .put(api_path + test_data.project)
+                .send(updates)
+                .end(function(err, res) {
+                    if(err)
+                        throw err;
+                    assert.equal(res.status, 200);
+                    assert.isObject(res.body);
+                    assert.equal(res.body.error, 'could not update');
+                done();
+            });
+        });
     });
 
     suite('DELETE Requests', function(){
 
-        test('Delete an issue: DELETE request to ' + api_path + test_data.project, function (done) {
+        test('12. Delete an issue: DELETE request to ' + api_path + test_data.project, function (done) {
 
             const filter = { 
                 _id: test_data.issues.at(1)._id
@@ -261,7 +280,7 @@ suite('Functional Tests', function() {
                 });
         });
 
-        test('Delete an issue with missing _id: DELETE request to ' + api_path + test_data.project, function (done) {
+        test('13. Delete an issue with missing _id: DELETE request to ' + api_path + test_data.project, function (done) {
             const filter = {
                 // Empty
             }
@@ -278,7 +297,7 @@ suite('Functional Tests', function() {
                 });
         });
 
-        test('Delete an issue with an invalid _id: DELETE request to ' + api_path + test_data.project, function (done) {
+        test('14. Delete an issue with an invalid _id: DELETE request to ' + api_path + test_data.project, function (done) {
             const filter = {
                  _id: 'invalid_id_001'
             }

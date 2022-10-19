@@ -79,7 +79,6 @@ const issue_update_put = (req, res) => {
     }
 
     const updates = Object.fromEntries(valid_fields);
-    console.log('updates', updates);
     updates.updated_on = new Date();
 
     Issue.findOneAndUpdate({_id: id}, updates, {new: true})
@@ -90,9 +89,9 @@ const issue_update_put = (req, res) => {
                 return;
             }
             res.status(200).json({
-                'result': 'sucessfully updated',
+                'result': 'successfully updated',
                 _id: id,
-                ...doc
+                ...doc._doc
             });
             
     });
