@@ -81,6 +81,8 @@ const issue_update_put = (req, res) => {
     const updates = Object.fromEntries(valid_fields);
     updates.updated_on = new Date();
 
+    console.log('test');
+
     Issue.findOneAndUpdate({_id: id}, updates, {new: true})
         .select(relFields)
         .exec((err, doc) => {
@@ -88,10 +90,10 @@ const issue_update_put = (req, res) => {
                 res.status(200).json( { 'error': 'could not update',  '_id': id } );
                 return;
             }
+
             res.status(200).json({
                 'result': 'successfully updated',
-                _id: id,
-                ...doc._doc
+                _id: id
             });
             
     });

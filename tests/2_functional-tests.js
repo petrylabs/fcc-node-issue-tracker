@@ -178,11 +178,12 @@ suite('Functional Tests', function() {
                         throw err;
                     assert.equal(res.status, 200);
                     assert.isObject(res.body);
-                    assert.equal(res.body.issue_title, updates.issue_title);
-                    assert.isAbove(
-                        Date.parse(res.body.updated_on),
-                        Date.parse(res.body.created_on)
-                    )
+                    assert.equal(res.body.result, 'successfully updated');
+                    // assert.equal(res.body.issue_title, updates.issue_title);
+                    // assert.isAbove(
+                    //     Date.parse(res.body.updated_on),
+                    //     Date.parse(res.body.created_on)
+                    // )
                 done();
             });
         });
@@ -202,8 +203,9 @@ suite('Functional Tests', function() {
                         throw err;
                     assert.equal(res.status, 200);
                     assert.isObject(res.body);
-                    assert.equal(res.body.issue_title, updates.issue_title);
-                    assert.equal(res.body.issue_text, updates.issue_text);
+                    assert.equal(res.body.result, 'successfully updated');
+                    // assert.equal(res.body.issue_title, updates.issue_title);
+                    // assert.equal(res.body.issue_text, updates.issue_text);
                 done();
             });
         });
